@@ -3,7 +3,7 @@ version: '${project.version}'
 main: com.orangekillmessagereloaded.OrangeKillMessageReloaded
 api-version: '1.20'
 author: DuoDuoJuZi
-website: https://github.com/duoduojuzi/OrangeKillMessage
+website: https://github.com/DuoDuoJuZi/OrangeKillMessageReloaded
 description: 自定义你的击杀消息，伤害性不大，侮辱性极强
 commands:
   okm:

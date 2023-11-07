@@ -2,7 +2,7 @@
 自定义击杀消息重置版<br>
 <br>
 **API版本 1.20.1**<br>
-构建方法: 下载，打开cmd，输入mvn build<br>
+构建方法: 下载，在目录打开cmd，输入mvn build<br>
 <br>
 反馈BUG/建议联系QQ: **<font color="red">1792249551</font>**<br>
 或加入橘子的交流群: **535820662**<br>

@@ -36,33 +36,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>1.9.20</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <sourceDirs>
-                        <sourceDir>src/main/kotlin</sourceDir>
-                        <sourceDir>src/main/java</sourceDir>
-                    </sourceDirs>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -137,24 +110,11 @@
             <systemPath>${basedir}/lib/json-simple-1.1.1.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
-            <version>${kotlin.version}</version>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.4</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/kotlin-stdlib-1.9.20.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-maven-plugin</artifactId>
-            <version>1.9.20</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/kotlin-maven-plugin-1.9.20.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
+            <systemPath>${basedir}/lib/PlaceholderAPI-2.11.4.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

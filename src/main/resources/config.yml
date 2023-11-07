@@ -1,0 +1,16 @@
+Lang:
+  Plugin_name: "§eOrangeKillMessageReloaded"
+  Profile: "§7伤害性不大，侮辱性极强"
+  Help:
+    main: "§eOrangeKillMessageReloaded 帮助"
+    usage: "§7用法:"
+    set: "§f/km set [Name] <Message> 设置自定义击杀信息"
+    view: "§f/km view [Name] 查看自定义击杀消息"
+    list: "§f/km list [Pages] 展示自定义击杀信息"
+    reload: "§f/km reload 重载插件"
+    logogram: "§7/okm 简写为 /km"
+  DefaultKiller: "§7默认的击杀玩家"
+  DefaultMainTitle: "§7玩家"
+  View_self_color: "§f"
+  View_other_color: "§7"
+  Reload: "§a插件重载成功"

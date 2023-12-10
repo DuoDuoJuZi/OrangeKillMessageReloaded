@@ -54,7 +54,7 @@ public class Commands implements CommandExecutor {
         String subCommand = strings[0].toLowerCase();
 
         if (subCommand.equals("help")) {
-            // 处理 "okm help" 命令
+
             commandSender.sendMessage(OrangeKillMessageReloaded.main.getConfig().getString("Lang.Help.main"));
             commandSender.sendMessage(OrangeKillMessageReloaded.main.getConfig().getString("Lang.Profile"));
             commandSender.sendMessage(" ");
@@ -68,23 +68,23 @@ public class Commands implements CommandExecutor {
             return true;
         }
         if (subCommand.equals("reload")) {
-            // 处理 "okm reload" 命令
+  
             OrangeKillMessageReloaded.main.reloadConfig();
             commandSender.sendMessage(OrangeKillMessageReloaded.main.getConfig().getString("Lang.Reload"));
         }
         if (subCommand.equals("list")) {
-            // 处理 "okm list" 命令
+
             if (commandSender instanceof Player) {
                 Player player = (Player) commandSender;
 
-                // 加载自定义消息
+
                 JsonArray customMessages = loadCustomMessages();
 
-                // 计算总页数
-                int pageSize = 5; // 每页显示的自定义消息数量
+
+                int pageSize = 5; 
                 int totalPages = (int) Math.ceil((double) customMessages.size() / pageSize);
 
-                // 获取当前页数
+
                 int currentPage = 1;
                 if (strings.length > 1) {
                     try {
@@ -99,11 +99,11 @@ public class Commands implements CommandExecutor {
                     }
                 }
 
-                // 计算起始索引和结束索引
+
                 int startIndex = (currentPage - 1) * pageSize;
                 int endIndex = Math.min(startIndex + pageSize, customMessages.size());
 
-                // 发送自定义消息列表
+
                 player.sendMessage(ChatColor.GOLD + "§m---------------------------------");
                 player.sendMessage(ChatColor.GOLD + "§6自定义击杀消息 第 §e" + currentPage + " §6/ §e" + totalPages + " §6页");
                 player.sendMessage(ChatColor.GOLD + " ");
@@ -121,23 +121,22 @@ public class Commands implements CommandExecutor {
         if (strings.length > 0 && strings[0].equals("set")) {
             if (commandSender instanceof Player) {
                 Player player = (Player) commandSender;
-                String playerName = player.getName(); // 获取玩家ID
+                String playerName = player.getName();
 
-                // 检查权限
+     
                 if (player.hasPermission("orangekillmessage.set")) {
                     if (strings.length > 2) {
-                        String targetPlayerName = strings[1]; // 获取目标玩家名称
-                        String message = strings[2]; // 获取玩家输入的内容
+                        String targetPlayerName = strings[1]; 
+                        String message = strings[2]; 
 
-                        // 检查是否有设置其他玩家消息的权限
                         if (player.hasPermission("orangekillmessage.setother")) {
-                            // 加载现有的自定义消息
+    
                             JsonArray customMessages = loadCustomMessages();
 
-                            // 更新现有的目标玩家自定义消息或创建新的消息
+            
                             updateOrCreateMessage(customMessages, targetPlayerName, message);
 
-                            // 保存自定义消息到文件
+                    
                             saveCustomMessages(customMessages);
 
                             player.sendMessage(ChatColor.GREEN + "已保存玩家 " + targetPlayerName + " 的自定义消息为 " + message);
@@ -147,15 +146,15 @@ public class Commands implements CommandExecutor {
                             return true;
                         }
                     } else if (strings.length > 1) {
-                        String message = strings[1]; // 获取玩家输入的内容
+                        String message = strings[1]; 
 
-                        // 读取现有的自定义消息
+
                         JsonArray customMessages = loadCustomMessages();
 
-                        // 更新现有的玩家自定义消息或创建新的消息
+
                         updateOrCreateMessage(customMessages, playerName, message);
 
-                        // 保存自定义消息到文件
+
                         saveCustomMessages(customMessages);
 
                         player.sendMessage(ChatColor.GREEN + "已保存你的自定义消息为 " + message);
@@ -168,12 +167,12 @@ public class Commands implements CommandExecutor {
             }
         }
 
-        // view
+
         if (subCommand.equals("view")) {
             if (commandSender instanceof Player) {
                 Player player = (Player) commandSender;
                 if (strings.length == 1) {
-                    // 默认查看自己的自定义消息
+
                     String playerName = player.getName();
                     JsonObject message = findCustomMessage(playerName);
                     if (message != null) {
@@ -184,7 +183,7 @@ public class Commands implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "未找到你的自定义消息！");
                     }
                 } else if (strings.length == 2) {
-                    // 查看指定玩家的自定义消息
+
                     String targetPlayerName = strings[1];
                     JsonObject message = findCustomMessage(targetPlayerName);
                     if (message != null) {
@@ -206,7 +205,7 @@ public class Commands implements CommandExecutor {
         return false;
     }
 
-    // 加载自定义消息
+
     private JsonArray loadCustomMessages() {
         try (BufferedReader reader = Files.newBufferedReader(filePath, StandardCharsets.UTF_8)) {
             JsonElement jsonElement = JsonParser.parseReader(reader);
@@ -219,25 +218,24 @@ public class Commands implements CommandExecutor {
         return new JsonArray();
     }
 
-    // 更新自定义消息
+
     private void updateOrCreateMessage(JsonArray customMessages, String playerName, String newMessage) {
         for (int i = 0; i < customMessages.size(); i++) {
             JsonObject message = customMessages.get(i).getAsJsonObject();
             String name = message.get("name").getAsString();
             if (name.equals(playerName)) {
                 message.addProperty("message", newMessage);
-                return; // 找到匹配的name后立即返回，不再继续遍历
+                return; 
             }
         }
 
-        // 如果没有找到匹配的name，则创建新的name,message在data.json
         JsonObject playerMessage = new JsonObject();
         playerMessage.addProperty("name", playerName);
         playerMessage.addProperty("message", newMessage);
         customMessages.add(playerMessage);
     }
 
-    // 保存自定义消息
+
     private void saveCustomMessages(JsonArray customMessages) {
         try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardCharsets.UTF_8)) {
             writer.write(gson.toJson(customMessages));
@@ -246,7 +244,7 @@ public class Commands implements CommandExecutor {
         }
     }
 
-    // view
+
     private JsonObject findCustomMessage(String playerName) {
         JsonArray customMessages = loadCustomMessages();
         for (JsonElement element : customMessages) {

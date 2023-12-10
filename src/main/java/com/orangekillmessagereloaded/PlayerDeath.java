@@ -27,16 +27,16 @@ public class PlayerDeath implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity(); // 获取死亡的玩家对象
+        Player player = event.getEntity(); 
         if (player.getKiller() != null) {
-            Entity killerEntity = player.getKiller(); // 获取击杀者的实体对象
+            Entity killerEntity = player.getKiller(); 
             if (killerEntity instanceof Player) {
-                lastKillerPlayer = ((Player) killerEntity).getName(); // 如果击杀者是玩家，获取玩家的ID作为变量
+                lastKillerPlayer = ((Player) killerEntity).getName(); 
             } else {
-                lastKillerPlayer = null; // 如果击杀者不是玩家，设置为null
+                lastKillerPlayer = null; 
             }
         } else {
-            lastKillerPlayer = null; // 没有击杀者时设置为null
+            lastKillerPlayer = null; 
         }
 
         lastKilledPlayerName = player.getName();
@@ -47,9 +47,9 @@ public class PlayerDeath implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         if (lastKillerPlayer != null) {
-            String customMessage = getCustomMessageFromJson(lastKillerPlayer); // 从 JSON 文件中获取自定义消息
+            String customMessage = getCustomMessageFromJson(lastKillerPlayer); 
             if (customMessage != null) {
-                // 替换标题中的默认消息为自定义消息
+                
                 String mainTitle = ChatColor.RED + ChatColor.translateAlternateColorCodes('&', customMessage);
                 String subTitle = ChatColor.GOLD + lastKillerPlayer + " 的自定义击杀信息！";
 
@@ -57,9 +57,9 @@ public class PlayerDeath implements Listener {
                 player.sendTitle(mainTitle, subTitle, 10, 70, 20);
             }
         } else {
-            // 如果lastKillerPlayer为null，不执行任何操作
+            
         }
-        lastKillerPlayer = null; // 在处理完击杀消息后，将lastKillerPlayer设置为null
+        lastKillerPlayer = null; 
     }
 
     private String getCustomMessageFromJson(String playerName) {
@@ -78,7 +78,7 @@ public class PlayerDeath implements Listener {
                 String name = (String) jsonObject.get("name");
                 String message = (String) jsonObject.get("message");
                 if (name != null && name.equals(playerName)) {
-                    return message; // 返回自定义消息
+                    return message; 
                 }
             }
         } catch (IOException | ParseException e) {
